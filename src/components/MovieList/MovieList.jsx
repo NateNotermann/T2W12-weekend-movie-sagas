@@ -9,9 +9,10 @@ function MovieList() {
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
-    function clickPoster () {
-        console.log('clicked. Going to Details');
+    function clickPoster (event) {
+        console.log('clicked. Going to Details', event);
         history.push('/details')
+        console.log('hostory:',history);
     }
 
 
@@ -31,7 +32,7 @@ function MovieList() {
                             <img 
                             src={movie.poster} 
                             alt={movie.title}
-                            onClick={clickPoster}
+                            onClick={(event) => clickPoster(event.target.key)}
                             />
                         </div>
                     );
