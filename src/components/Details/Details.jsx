@@ -1,13 +1,20 @@
 import '../Details/Details';
 import {useHistory } from 'react-router-dom';
+import {HashRouter as Router, Route} from 'react-router-dom';
+import ERD from '../ERD/ERD';
 
 function Details () {
 
     const history = useHistory();
+
     function backTolist () {
         console.log('Back to Movie List');
         history.push('/')
-    
+    }
+
+    function toErd (){
+        console.log('going to ERD');
+        history.push('/erd')
     }
 
     return(
@@ -22,6 +29,11 @@ function Details () {
             Movie info here
         </p>
         <button onClick={backTolist}> back to list</button>
+        <button onClick={toErd}> Go to ERD</button>
+
+        <Route path="/erd" exact>
+          <ERD />
+        </Route>
         </>
     )
 }
