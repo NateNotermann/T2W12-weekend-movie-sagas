@@ -28,6 +28,7 @@ function Details (  ) {
     
     }
 
+    
 
     useEffect(() => {
     }, [] );
