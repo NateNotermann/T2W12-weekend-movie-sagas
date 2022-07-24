@@ -6,29 +6,30 @@ import ERD from '../ERD/ERD';
 import { useState, useEffect } from 'react';
 
 
-function Details () {
+function Details (  ) {
 
     const history = useHistory();
     const currentMovie = useSelector(store => store.currentMovie)
-
+    const dispatch = useDispatch();
     
-
+// ------ Buttons ------ //
     function backTolist () {
-        // console.log('Back to Movie List');
         history.push('/')
     }
 
     function toErd (){
-        // console.log('going to ERD');
         history.push('/erd')
     }
 
 
-
+    function currentMovieFunction (){
+            console.log('currentMovie', currentMovie.movie);
+            // console.log works, so state is updating..
+    
+    }
 
 
     useEffect(() => {
-     
     }, [] );
 
 
@@ -38,14 +39,16 @@ function Details () {
         <header>        
             <h2> Details Page</h2>            
         </header>
-
-        <h3>Title here</h3>
-        <h4> Genres Here</h4>
-        <p>Movie info here</p>
-
         
-        <button onClick={backTolist}> back to list</button>
+        <h3>{currentMovie.movie.title}</h3>
+        <p> {currentMovie.movie.description}</p>
+        <img src={currentMovie.movie.poster}></img>
+
+        <div>        
+            <button onClick={backTolist}> back to list</button>
         <button onClick={toErd}> Go to ERD</button>
+        <button onClick={currentMovieFunction}>currentMovie</button>
+        </div>
 
         <Route path="/erd" exact>
           <ERD />

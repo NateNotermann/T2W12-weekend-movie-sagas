@@ -3,11 +3,17 @@ import './App.css';
 import MovieList from '../MovieList/MovieList'
 import Details from '../Details/Details'
 import ERD from '../ERD/ERD';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function App() {
+
+  const testCurrentMovie = useSelector(store => store.currentMovie);
+
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
+      {/* <h3>CurrentMovie: {testCurrentMovie}</h3> */}
       <Router>        
         <Route path="/" exact>
           <MovieList />

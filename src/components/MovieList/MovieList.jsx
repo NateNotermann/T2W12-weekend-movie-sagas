@@ -10,21 +10,21 @@ function MovieList() {
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
-   
+   const currentMovie = useSelector(store => store.currentMovie);
 
-
+// ------ send CURRENT MOVIE info to REDUCER ------ //
     function clickPoster (movie) {
         console.log('CLICKED MOVIE:', movie);
         dispatch ({
             type: 'GET_MOVIE',
             payload: {movie}
         })
+        // console.log('currentMovie:', currentMovie); -checks currentMovie Store
         history.push('/details')
       
     }
 
-
-
+// ------ on PAGE LOAD to this ------ //
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
