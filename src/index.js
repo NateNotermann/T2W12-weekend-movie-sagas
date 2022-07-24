@@ -11,6 +11,11 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+
+
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
@@ -20,7 +25,7 @@ function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
+        // console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -47,6 +52,7 @@ const currentMovie = (state = [], action) => {
     switch (action.type) {
         case 'GET_MOVIE':
             return action.payload;
+            console.log('state (index.jsx)',state);
         default:
             return state;
     }
@@ -57,7 +63,7 @@ const currentMovie = (state = [], action) => {
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
-            return action.payload;
+            return action.payload;  
         default:
             return state;
     }

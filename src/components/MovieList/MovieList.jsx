@@ -2,20 +2,25 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+
 
 function MovieList() {
 
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
+   
+
 
     function clickPoster (movie) {
-        console.log('clicked. Going to Details', movie);
+        console.log('CLICKED MOVIE:', movie);
         dispatch ({
             type: 'GET_MOVIE',
             payload: {movie}
         })
         history.push('/details')
+      
     }
 
 
