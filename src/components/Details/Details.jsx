@@ -43,7 +43,12 @@ function Details (  ) {
         <h3>{currentMovie.movie.title}</h3>
         <p> {currentMovie.movie.description}</p>
         <img src={currentMovie.movie.poster}></img>
-
+        
+        <ul>
+            {currentMovie.map((taco, i) => (
+                <li key={currentMovie.movie.id}></li>
+            ))}
+        </ul>
         <div>        
             <button onClick={backTolist}> back to list</button>
         <button onClick={toErd}> Go to ERD</button>
