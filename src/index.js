@@ -34,6 +34,19 @@ function* fetchAllMovies() {
         
 } 
 
+function* getGenres() {
+    // get all genres from the DB
+    try {
+        const genres = yield axios.get('/api/movie/genre');
+        // console.log('get all:', movies.data);
+        yield put({ type: 'GET_GENRES', payload: movies.data });
+
+    } catch {
+        console.log('get all error');
+    }
+        
+} 
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 

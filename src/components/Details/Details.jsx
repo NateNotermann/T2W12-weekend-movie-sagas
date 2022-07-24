@@ -10,7 +10,9 @@ function Details (  ) {
 
     const history = useHistory();
     const currentMovie = useSelector(store => store.currentMovie)
+    const genres = useSelector(store => store.genres)
     const dispatch = useDispatch();
+    
     
 // ------ Buttons ------ //
     function backTolist () {
@@ -21,18 +23,16 @@ function Details (  ) {
         history.push('/erd')
     }
 
-
-    function currentMovieFunction (){
-            console.log('currentMovie', currentMovie.movie);
+    function currentMovieFunction (){ // checks currentMovie
+            // console.log('currentMovie', currentMovie.movie);
             // console.log works, so state is updating..
-    
     }
 
-    
+
 
     useEffect(() => {
+        
     }, [] );
-
 
 
     return(
@@ -45,13 +45,15 @@ function Details (  ) {
         <p> {currentMovie.movie.description}</p>
         <img src={currentMovie.movie.poster}></img>
         
-        <ul>
-            {currentMovie.map((taco, i) => (
-                <li key={currentMovie.movie.id}></li>
-            ))}
-        </ul>
+        <h4>Genres</h4>
+        {genres.map((genres, i ) =>  {
+            return(
+                <h4 key={i}>{genres.name}</h4>
+            )
+        })}
+
         <div>        
-            <button onClick={backTolist}> back to list</button>
+        <button onClick={backTolist}> back to list</button>
         <button onClick={toErd}> Go to ERD</button>
         <button onClick={currentMovieFunction}>currentMovie</button>
         </div>
