@@ -32,7 +32,7 @@ function* fetchAllMovies() {
         console.log('get all error');
     }
         
-}
+} 
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -47,12 +47,12 @@ const movies = (state = [], action) => {
     }
 }
 
-// ------ store CURRENT MOVIE info ------ //
-const currentMovie = (state = [], action) => {
+// ------ store CURRENT MOVIE info in REDUCER------ //
+const currentMovie = (state = {}, action) => {
     switch (action.type) {
         case 'GET_MOVIE':
+            console.log('action.payload:',action.payload, '(index.jsx)');
             return action.payload;
-            console.log('state (index.jsx)',state);
         default:
             return state;
     }
@@ -77,7 +77,7 @@ const storeInstance = createStore(
         genres,
     }),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger),
+    applyMiddleware(sagaMiddleware,logger ), //logger
 );
 
 // Pass rootSaga into our sagaMiddleware
