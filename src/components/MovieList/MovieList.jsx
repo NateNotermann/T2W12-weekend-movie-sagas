@@ -26,7 +26,10 @@ function MovieList() {
 
 // ------ on PAGE LOAD to this ------ //
     useEffect(() => {
+        // ------ 1. MovieList - call SAGA with 'FETCH_MOVIES' 
         dispatch({ type: 'FETCH_MOVIES' });
+        
+        dispatch({ type: 'GET_GENRES' }); 
     }, []);
 
     return (

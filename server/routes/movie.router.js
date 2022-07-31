@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+
+
+
+
+/** ---------- ROUTES ---------- **/
+
+// -------- app.use('/api/movie', movieRouter); -------- //
+
+
+
+
 // ------ Router for ALL MOVIES List ------ //
 router.get('/', (req, res) => {
 
@@ -16,7 +27,11 @@ router.get('/', (req, res) => {
     })
 
 });
+ 
 
+
+
+// ------------ create new movie route below -------- //
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

@@ -14,13 +14,38 @@ import axios from 'axios';
 
 
 
+// you could map over the array of genres or 
+//-- or -- 
+//SPREAD over them to get the last state plus the new action
+
+// axios.get will connect to the server
+    // axios,get needs to match a router.get
+    // axios.post needs to match a router.post
+
+//Movie Details, put $ at the end of the things you want to check.
+//like src={movieDetails?.poster} if this thing is a thing fo it, if not, more on.
+
+//redux is for variables, 
+    // saga is for functions(server calls)
+
+    
 
 
-// Create the rootSaga generator function
+// ------------------ rootSaga generator function --- listening for:------------  //
 function* rootSaga() {
+    // ---- If rootSaga hears 'FETCH_MOVIES' (at any time or anywhere)
+        // then run fetchAllMovies ----//
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+
+    // gonna test'GET_GENRES' in a button click, in movie details 
+    yield takeEvery('GET_GENRES', getGenres );
 }
 
+
+
+// ---------- GENERATOR SAGAS ---------- //
+
+// ---------- fetchAllMovies for MovieList ---------- //
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
@@ -29,28 +54,36 @@ function* fetchAllMovies() {
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
-        console.log('get all error');
+        console.log('SET_MOVIES error');
     }
-        
 } 
 
-function* getGenres() {
+
+// ---------- getGenres for MovieList and then movieDetails---------- //
+function* getGenres() {   // this function is not being called yet. will go in the rootSage //
     // get all genres from the DB
+    // movies.data goes to movie bd
     try {
-        const genres = yield axios.get('/api/movie/genre');
-        // console.log('get all:', movies.data);
-        yield put({ type: 'GET_GENRES', payload: movies.data });
+        const genres = yield axios.get(`/api/movie/genre/${action.payload.id}`);
+        
+        console.log('getGenres SAGAfunction', genres.data);
+        // -- it's genres.data b/c we named the const 'genres' above -- //
+        yield put({ type: 'GET_GENRES', payload: genres.data });
 
-    } catch {
-        console.log('get all error');
+    } catch(error) {
+        console.log('getGenres SAGAfunction error', error);
     }
         
 } 
 
-// Create sagaMiddleware
+
+
+
+// ---------- Create sagaMiddleware---------- //
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store movies returned from the server
+// ---- state is an array so we can .map() through it in the component  ---- //
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -61,6 +94,8 @@ const movies = (state = [], action) => {
 }
 
 // ------ store CURRENT MOVIE info in REDUCER------ //
+// ---- store is an OBJECT b/a we only need one, and we need to be able to get 
+    // it's KEY values. like movie.title, movie.description, 
 const currentMovie = (state = {}, action) => {
     switch (action.type) {
         case 'GET_MOVIE':
@@ -73,6 +108,7 @@ const currentMovie = (state = {}, action) => {
 
 
 // Used to store the movie genres
+// --- will be storing multiple genres --- //
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -90,7 +126,7 @@ const storeInstance = createStore(
         genres,
     }),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware,logger ), //logger
+    applyMiddleware(sagaMiddleware ), //logger
 );
 
 // Pass rootSaga into our sagaMiddleware

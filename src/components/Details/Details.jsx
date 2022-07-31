@@ -24,7 +24,8 @@ function Details (  ) {
     }
 
     function currentMovieFunction (){ // checks currentMovie
-            // console.log('currentMovie', currentMovie.movie);
+            console.log('currentMovie', currentMovie.movie);
+            console.log('test genres store', genres.id );
             // console.log works, so state is updating..
     }
 
