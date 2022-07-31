@@ -38,7 +38,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
 
     // gonna test'GET_GENRES' in a button click, in movie details 
-    yield takeEvery('GET_GENRES', getGenres );
+    yield takeEvery('GET_GENRES_DB', getGenres );
 }
 
 
@@ -50,7 +50,7 @@ function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        // console.log('get all:', movies.data);
+        console.log('get movies.data:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -64,11 +64,11 @@ function* getGenres() {   // this function is not being called yet. will go in t
     // get all genres from the DB
     // movies.data goes to movie bd
     try {
-        const genres = yield axios.get(`/api/movie/genre/${action.payload.id}`);
-        
-        console.log('getGenres SAGAfunction', genres.data);
+        const genres = yield axios.get('/api/genre');
         // -- it's genres.data b/c we named the const 'genres' above -- //
-        yield put({ type: 'GET_GENRES', payload: genres.data });
+        console.log('getGenres payload', genres.data);
+        
+        yield put({ type: 'SET_GENRES', payload: genres.data });
 
     } catch(error) {
         console.log('getGenres SAGAfunction error', error);

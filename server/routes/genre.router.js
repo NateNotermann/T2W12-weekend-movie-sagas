@@ -20,11 +20,12 @@ const pool = require('../modules/pool')
 // eventually GROUP BY "movies."title" or "genres"."movie.id";
 
 // ----- Get all genres for each movie ----- //
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
   const query = 'SELECT * FROM "genres";';
   pool.query(query)
     .then( result => {
-      console.log('route.get result:', result);
+      // console.log('query;', query);
+      console.log('genre.router result:', result);
       res.send(result.rows);
     })
     .catch(err => {
@@ -33,6 +34,7 @@ router.get('/:id', (req, res) => {
     })
 
 });
+
 
 
 // router.get('/id', (req, res) => {

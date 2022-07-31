@@ -29,7 +29,7 @@ function MovieList() {
         // ------ 1. MovieList - call SAGA with 'FETCH_MOVIES' 
         dispatch({ type: 'FETCH_MOVIES' });
         
-        dispatch({ type: 'GET_GENRES' }); 
+        dispatch({ type: 'GET_GENRES_DB' }); 
     }, []);
 
     return (
