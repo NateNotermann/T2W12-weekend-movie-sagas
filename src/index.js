@@ -65,7 +65,8 @@ function* getGenres(action) {   // this function is not being called yet. will g
     // movies.data goes to movie bd
     try {
         // -- 
-        const genres = yield axios.get(`/api/genre/${action.payload}`);
+        const genres = yield axios.get(`/api/genre/${action.payload}`); // this is correct -  don`t change this line!
+        
         // -- it's genres.data b/c we named the const 'genres' above -- //
         console.log('axios.get genres.data:', genres.data);
         console.log('axios.get action.payload:', action.payload);

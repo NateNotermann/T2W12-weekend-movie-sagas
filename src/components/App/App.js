@@ -19,7 +19,8 @@ function App() {
           <MovieList />
         </Route>
         
-        <Route path="/details/:title/:id" exact > {/* - Dynamic route path - */}
+        <Route path="/details/:id" exact > {/* - Dynamic route path - */}
+        {/* <Route path="/details/:title/:id" exact > - Dynamic route path - */}
           {/* -- added /:title - to have further understanding of what is happening -- */}
           {/* /:id is a /:taco colon tells it it will change i think */}
           <Details /> {/* Details page --- DONE ---- */}

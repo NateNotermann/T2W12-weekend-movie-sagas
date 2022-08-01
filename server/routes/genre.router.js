@@ -31,16 +31,16 @@ router.get('/:id', (req, res) => {
     // let title = req.params.title;      
     // let description = req.params.description;      
 
-  // const query = 'SELECT * FROM "genres";';
-  const query = `SELECT array_agg(genres.name)
-  FROM "genres" JOIN "movies_genres"
-  ON movies_genres.genre_id = genres.id
-  WHERE movie_id = ${id}`;
+  const query = 'SELECT * FROM "genres";';
+  // const query = `SELECT array_agg(genres.name)
+  // FROM "genres" JOIN "movies_genres"
+  // ON movies_genres.genre_id = genres.id
+  // WHERE movie_id = ${id}`;
   // WHERE movie_id = $1`;
 
 
   // pool.query(query, [id])
-  pool.query(query, [id])
+  pool.query(query)
     .then( result => {
       // console.log('query;', query);
       console.log('genre.router result:', result);

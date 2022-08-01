@@ -23,8 +23,8 @@ function MovieList() {
             payload: {movie}
         })
         // console.log('currentMovie:', currentMovie); -checks currentMovie Store
-        // history.push(`/details`)
-        history.push(`/details/${movie.title}/${movie.id}`)
+        // history.push(`/details`) 
+        history.push(`/details/${movie.id}`)
       
     }
 
