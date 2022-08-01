@@ -24,8 +24,8 @@ function Details (  ) {
     }
 
     function currentMovieFunction (){ // checks currentMovie
-            console.log('currentMovie', currentMovie.movie);
-            console.log('test genres store', genres.id );
+            console.log('currentMovie.movie (Details.jsx)', currentMovie.movie);
+            console.log('GENRE.id (Details.jsx)', genres.id );
             // console.log works, so state is updating..
     }
 
@@ -46,11 +46,12 @@ function Details (  ) {
         <h3>{currentMovie.movie.title}</h3>
         <p> {currentMovie.movie.description}</p>
         <img src={currentMovie.movie.poster}></img>
-        
+        <h3>{genres.array_agg}</h3>
         <h4>Genres</h4>
         {genres.map((genres, i ) =>  {
             return(
-                <h4 key={i}>{genres.name}</h4>
+                
+                <h4 key={i}>{genres.array_agg}</h4>
             )
         })}
 

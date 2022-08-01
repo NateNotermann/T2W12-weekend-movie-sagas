@@ -60,16 +60,15 @@ function* fetchAllMovies() {
 
 
 // ---------- getGenres for MovieList and then movieDetails---------- //
-function* getGenres(action) {   // this function is not being called yet. will go in the rootSage //
+function* getGenres(action) {   
     // get all genres from the DB
     // movies.data goes to movie bd
     try {
-        // -- 
         const genres = yield axios.get(`/api/genre/${action.payload}`); // --THIS IS CORRECT DON`T CHANGE THIS LINE -- //
         // INCORRECT CODE WAS: -->> ${action.payload.movie.id}`);"  -- should JUST be "${action.payload}" --- //
  
         // -- it's genres.data b/c we named the CONST 'genres' above -- //
-        console.log('getGenres GENRES.data: (INDEX.JS)', genres.data);
+        // console.log('getGenres GENRES.data: (INDEX.JS)', genres.data);  // <<-- too much in browser terminal, turning off //
 
             // below line in UNDEFINED. Don`t really need, turning off -- //
         // console.log('getGenres action.payload: is UNDEFINED (INDEX.JS)', action.payload);

@@ -51,6 +51,7 @@ function MovieList() {
                             onClick={(event) => clickPoster (movie)} // sends (movie) to 'clickPoster' function
                             />
                             <h4>{movie.id}</h4>
+                            <h4>{movie.array_agg}</h4>
                         </div>
                     );
                 })}
