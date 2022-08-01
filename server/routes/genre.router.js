@@ -22,14 +22,24 @@ const pool = require('../modules/pool')
 // ----- Get all genres for each movie ----- //
 router.get('/:id', (req, res) => {
   
-  let id = req.params.id; // pulls id from db and saves in varaiable 
+  let id = req.params; // -- '.id' IS NO a TACO!! -- 
+      // ---- req.params.id pulls 'id' from db, and saves in 'id' variable 
+      // 'let id =', that 'id' IS a TACO. But makes sense to name it, 
+          // -based on the action thing you are getting form the db.
+          // - aka, base it on your req.params.(naming convention here)
+  // --- OTHER LOGICAL EXAMPLES -- //
+    // let title = req.params.title;      
+    // let description = req.params.description;      
+
   // const query = 'SELECT * FROM "genres";';
   const query = `SELECT array_agg(genres.name)
   FROM "genres" JOIN "movies_genres"
   ON movies_genres.genre_id = genres.id
-  WHERE movie_id = $1`;
+  WHERE movie_id = ${id}`;
+  // WHERE movie_id = $1`;
 
 
+  // pool.query(query, [id])
   pool.query(query, [id])
     .then( result => {
       // console.log('query;', query);

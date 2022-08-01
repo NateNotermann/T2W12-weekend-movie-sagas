@@ -13,15 +13,18 @@ function MovieList() {
    const currentMovie = useSelector(store => store.currentMovie);
 
 // ------ send CURRENT MOVIE info to REDUCER ------ //
-    function clickPoster (movie) {
-        console.log('CLICKED MOVIE:', movie);
+    function clickPoster (movie) { // receives (movie) from the 'onClick={(event) => clickPoster (movie)} // 
+        // console.log('CLICKED MOVIE:', movie);
+        console.log('MOVIE.id:', movie.id);
+        console.log('MOVIE.title:', movie.title);
+
         dispatch ({
             type: 'GET_MOVIE',
             payload: {movie}
         })
         // console.log('currentMovie:', currentMovie); -checks currentMovie Store
         // history.push(`/details`)
-        history.push(`/details/${movie.id}`)
+        history.push(`/details/${movie.title}/${movie.id}`)
       
     }
 
@@ -29,7 +32,7 @@ function MovieList() {
     useEffect(() => {
         // ------ 1. MovieList - call SAGA with 'FETCH_MOVIES' 
         dispatch({ type: 'FETCH_MOVIES' });
-        
+        // uses 'GET_GENRES_DB' to tell the saga to run the get all genres function
         dispatch({ type: 'GET_GENRES_DB' }); 
     }, []);
 
@@ -46,7 +49,7 @@ function MovieList() {
                             src={movie.poster} 
                             alt={movie.title}
 
-                            onClick={(event) => clickPoster (movie)}
+                            onClick={(event) => clickPoster (movie)} // sends (movie) to 'clickPoster' function
                             />
                         </div>
                     );
