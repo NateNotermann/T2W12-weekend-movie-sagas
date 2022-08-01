@@ -44,13 +44,13 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <h4>{movie.id}</h4>
                             <img 
                             src={movie.poster} 
                             alt={movie.title}
-
+                            
                             onClick={(event) => clickPoster (movie)} // sends (movie) to 'clickPoster' function
                             />
+                            <h4>{movie.id}</h4>
                         </div>
                     );
                 })}

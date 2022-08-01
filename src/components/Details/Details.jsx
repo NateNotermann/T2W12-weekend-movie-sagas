@@ -32,6 +32,7 @@ function Details (  ) {
 
 
     useEffect(() => {
+        // dispatch({ type: 'FETCH_MOVIES' });
          dispatch({ type: 'GET_GENRES_DB' }); 
     }, [] );
 
