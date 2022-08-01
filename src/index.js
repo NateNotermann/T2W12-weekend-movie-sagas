@@ -50,7 +50,7 @@ function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get movies.data:', movies.data);
+        console.log('axios.get movies.data:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -60,15 +60,17 @@ function* fetchAllMovies() {
 
 
 // ---------- getGenres for MovieList and then movieDetails---------- //
-function* getGenres() {   // this function is not being called yet. will go in the rootSage //
+function* getGenres(action) {   // this function is not being called yet. will go in the rootSage //
     // get all genres from the DB
     // movies.data goes to movie bd
     try {
-        const genres = yield axios.get('/api/genre');
+        // -- 
+        const genres = yield axios.get(`/api/genre/${action.payload}`);
         // -- it's genres.data b/c we named the const 'genres' above -- //
-        console.log('getGenres payload', genres.data);
+        console.log('axios.get genres.data:', genres.data);
+        console.log('axios.get action.payload:', action.payload);
         
-        yield put({ type: 'SET_GENRES', payload: genres.data });
+        yield put({ type: 'SET_GENRES_STATE', payload: genres.data });
 
     } catch(error) {
         console.log('getGenres SAGAfunction error', error);
@@ -99,7 +101,10 @@ const movies = (state = [], action) => {
 const currentMovie = (state = {}, action) => {
     switch (action.type) {
         case 'GET_MOVIE':
+            // action.payload is entire movie
             console.log('action.payload:',action.payload, '(index.jsx)');
+             // action.payload.movie.id  -- is just find the id within the currentMovie object
+            console.log('action.payload:',action.payload.movie.id, '(index.jsx)');
             return action.payload;
         default:
             return state;
@@ -111,8 +116,11 @@ const currentMovie = (state = {}, action) => {
 // --- will be storing multiple genres --- //
 const genres = (state = [], action) => {
     switch (action.type) {
-        case 'SET_GENRES':
-            return action.payload;  
+        case 'SET_GENRES_STATE':
+            return (
+                console.log('genre state action:', action ),
+                action.payload
+            );  
         default:
             return state;
     }

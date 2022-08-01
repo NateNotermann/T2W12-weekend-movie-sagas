@@ -19,7 +19,8 @@ function App() {
           <MovieList />
         </Route>
         
-        <Route path="/details" exact>
+        <Route path="/details/:id" exact >
+          {/* /:id is a /:taco collen tells it it will change i think */}
           <Details /> {/* Details page --- DONE ---- */}
         </Route>
         

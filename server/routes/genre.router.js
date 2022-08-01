@@ -20,9 +20,17 @@ const pool = require('../modules/pool')
 // eventually GROUP BY "movies."title" or "genres"."movie.id";
 
 // ----- Get all genres for each movie ----- //
-router.get('/', (req, res) => {
-  const query = 'SELECT * FROM "genres";';
-  pool.query(query)
+router.get('/:id', (req, res) => {
+  
+  let id = req.params.id; // pulls id from db and saves in varaiable 
+  // const query = 'SELECT * FROM "genres";';
+  const query = `SELECT array_agg(genres.name)
+  FROM "genres" JOIN "movies_genres"
+  ON movies_genres.genre_id = genres.id
+  WHERE movie_id = $1`;
+
+
+  pool.query(query, [id])
     .then( result => {
       // console.log('query;', query);
       console.log('genre.router result:', result);

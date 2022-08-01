@@ -32,7 +32,7 @@ function Details (  ) {
 
 
     useEffect(() => {
-        
+         dispatch({ type: 'GET_GENRES_DB' }); 
     }, [] );
 
 

@@ -20,7 +20,8 @@ function MovieList() {
             payload: {movie}
         })
         // console.log('currentMovie:', currentMovie); -checks currentMovie Store
-        history.push('/details')
+        // history.push(`/details`)
+        history.push(`/details/${movie.id}`)
       
     }
 
@@ -40,9 +41,11 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
+                            <h4>{movie.id}</h4>
                             <img 
                             src={movie.poster} 
                             alt={movie.title}
+
                             onClick={(event) => clickPoster (movie)}
                             />
                         </div>
