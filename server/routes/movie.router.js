@@ -14,6 +14,7 @@ const pool = require('../modules/pool')
 
 
 // ------ Router for ALL MOVIES List ------ //
+
 router.get('/', (req, res) => {
 
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
@@ -28,6 +29,12 @@ router.get('/', (req, res) => {
 
 });
  
+
+
+ // ----- ORIGINAL SQL Query to GET all movies info ---- NO GENRES------ //
+ const query = `SELECT * FROM movies ORDER BY "title" ASC`;
+// ----- ORIGINAL SQL Query to GET all movies info ---- NO GENRES------ //
+
 
 
 

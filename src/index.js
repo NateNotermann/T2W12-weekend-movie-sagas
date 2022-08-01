@@ -50,7 +50,7 @@ function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('axios.get movies.data:', movies.data);
+        // console.log('fetchAllMovies const MOVIES.data:(index.js)', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -60,16 +60,18 @@ function* fetchAllMovies() {
 
 
 // ---------- getGenres for MovieList and then movieDetails---------- //
-function* getGenres(action) {   // this function is not being called yet. will go in the rootSage //
+function* getGenres(action) {   
     // get all genres from the DB
     // movies.data goes to movie bd
     try {
-        // -- 
-        const genres = yield axios.get(`/api/genre/${action.payload}`); // this is correct -  don`t change this line!
-        
-        // -- it's genres.data b/c we named the const 'genres' above -- //
-        console.log('axios.get genres.data:', genres.data);
-        console.log('axios.get action.payload:', action.payload);
+        const genres = yield axios.get(`/api/genre/${action.payload}`); // --THIS IS CORRECT DON`T CHANGE THIS LINE -- //
+        // INCORRECT CODE WAS: -->> ${action.payload.movie.id}`);"  -- should JUST be "${action.payload}" --- //
+ 
+        // -- it's genres.data b/c we named the CONST 'genres' above -- //
+        // console.log('getGenres GENRES.data: (INDEX.JS)', genres.data);  // <<-- too much in browser terminal, turning off //
+
+            // below line in UNDEFINED. Don`t really need, turning off -- //
+        // console.log('getGenres action.payload: is UNDEFINED (INDEX.JS)', action.payload);
         
         yield put({ type: 'SET_GENRES_STATE', payload: genres.data });
 
@@ -119,8 +121,10 @@ const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES_STATE':
             return (
-                console.log('genre state action:', action ),
-                action.payload
+                console.log('GENRES STORE action.payload`s is/:', action.payload ),
+
+                action.payload // -- CURRENTLY 'action.payload' returns ALL genres -- // 
+               
             );  
         default:
             return state;

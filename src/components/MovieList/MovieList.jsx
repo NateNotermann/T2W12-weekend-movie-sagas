@@ -10,6 +10,7 @@ function MovieList() {
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
+    const genres = useSelector(store => store.genres);
    const currentMovie = useSelector(store => store.currentMovie);
 
 // ------ send CURRENT MOVIE info to REDUCER ------ //
@@ -44,16 +45,32 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <h4>{movie.id}</h4>
                             <img 
                             src={movie.poster} 
                             alt={movie.title}
-
+                            
                             onClick={(event) => clickPoster (movie)} // sends (movie) to 'clickPoster' function
                             />
+                            <h4>{movie.id}</h4>
+                            <h4>{movie.array_agg}</h4>
+                            <div>
+                
+            <h4>It's Genres are:</h4>
+            {genres.map((genres, i) => {
+                console.log(i);
+                if (i === (movie.id -1) ) {
+                    console.log(' i === currentMovie.id!!!');
+                    return (<>
+                        <h1>{genres.array_agg}</h1>
+                        </>
+                    )
+                }
+            })}
+            </div>
                         </div>
                     );
                 })}
+
             </section>
         </main>
 

@@ -31,7 +31,21 @@ router.get('/:id', (req, res) => {
     // let title = req.params.title;      
     // let description = req.params.description;      
 
-  const query = 'SELECT * FROM "genres";';
+  // const query = 'SELECT * FROM "genres";';
+
+  // ----- THIS CODE GET ALL MOVIE GENRES FOR EACH MOVIE CORRECTLY ----- //
+  const query = `SELECT array_agg(genres.name) FROM movies JOIN movies_genres 
+  ON movies_genres.movie_id = movies.id JOIN genres 
+  ON genres.id = movies_genres.genre_id GROUP BY movies.title;`;
+  // ----- THIS CODE GET ALL MOVIE GENRES FOR EACH MOVIE CORRECTLY ----- //
+
+  // --- this code below doesn't work -- //
+  // const query = `SELECT array_agg(genres.name)
+  // FROM genres JOIN movies_genres
+  // ON movies_genres.genre_id = genres.id
+  // GROUP BY movies_genres.movie_id;`;
+  // --- this code below doesn't work -- //
+
   // const query = `SELECT array_agg(genres.name)
   // FROM "genres" JOIN "movies_genres"
   // ON movies_genres.genre_id = genres.id
@@ -52,6 +66,31 @@ router.get('/:id', (req, res) => {
     })
 
 });
+
+// --------- BACK UP WORKING ROUTER CODE --------- // 
+// --- USE IF YOU GET STUCK IN A NEW RABBIT HOLE OF CODE --- //
+// router.get('/:id', (req, res) => {
+//   let id = req.params;
+//   const query = 'SELECT * FROM "genres";';
+//   pool.query(query)
+//   .then( result => {
+//     // console.log('query;', query);
+//     console.log('genre.router result:', result);
+//     res.send(result.rows);
+//   })
+//   .catch(err => {
+//     console.log('ERROR in route.get genres', err);
+//     res.sendStatus(500)
+//   })
+// });
+// --- USE IF YOU GET STUCK IN A NEW RABBIT HOLE OF CODE --- //
+// --------- BACK UP WORKING ROUTER CODE --------- // 
+
+
+
+
+
+
 
 
 
